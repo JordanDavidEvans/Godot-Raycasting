@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://wkoul8w1emc"]
+
+[ext_resource type="Script" path="res://suspension.gd" id="1_qy3lm"]
+[ext_resource type="Texture2D" uid="uid://bhbtip6a24l03" path="res://images/boat.png" id="2_vebtk"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="3_6dggi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohnp8"]
+size = Vector2(395.75, 20)
+
+[node name="car" type="RigidBody2D"]
+
+[node name="body" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ohnp8")
+
+[node name="left" type="RayCast2D" parent="body"]
+position = Vector2(-200, 0)
+script = ExtResource("1_qy3lm")
+
+[node name="right" type="RayCast2D" parent="body"]
+position = Vector2(200, 0)
+script = ExtResource("1_qy3lm")
+
+[node name="boat" type="Sprite2D" parent="."]
+texture = ExtResource("2_vebtk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
+position_smoothing_enabled = true
+script = ExtResource("3_6dggi")
