@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd6m58kw8jwt8"]
+
+[ext_resource type="Script" path="res://body.gd" id="1_eevpy"]
+[ext_resource type="Script" path="res://RayCast2D.gd" id="2_rdwoj"]
+[ext_resource type="Script" path="res://RayCast2D2.gd" id="3_7qk1w"]
+[ext_resource type="Script" path="res://RayCast2D3.gd" id="4_hk66c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihvdd"]
+size = Vector2(10.5, 10.5)
+
+[node name="body" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_eevpy")
+metadata/_edit_group_ = true
+
+[node name="shape" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_ihvdd")
+
+[node name="box" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-20, 20, -20, -20, 20, -20, 20, 20)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-1, 0)
+target_position = Vector2(0, 500)
+script = ExtResource("2_rdwoj")
+
+[node name="Line2D" type="Line2D" parent="RayCast2D"]
+position = Vector2(1, 0)
+points = PackedVector2Array(0, 0, 0, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(-2, 0)
+target_position = Vector2(0, 500)
+script = ExtResource("3_7qk1w")
+
+[node name="Line2D" type="Line2D" parent="RayCast2D2"]
+position = Vector2(1, 0)
+points = PackedVector2Array(0, 0, 0, 0)
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+position = Vector2(-4, 0)
+target_position = Vector2(0, 500)
+script = ExtResource("4_hk66c")
+
+[node name="Line2D" type="Line2D" parent="RayCast2D3"]
+position = Vector2(1, 0)
+points = PackedVector2Array(0, 0, 0, 0)
+
+[connection signal="target_found" from="RayCast2D3" to="RayCast2D" method="_on_ray_cast_2d_3_target_found"]
+[connection signal="target_found" from="RayCast2D3" to="RayCast2D2" method="_on_ray_cast_2d_3_target_found"]
